@@ -1,107 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Lockedeen - Sobriety Support</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #f4f6f9;
-      color: #333;
-    }
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 { margin: 0; }
-    section {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    .counter {
-      font-size: 2em;
-      color: #27ae60;
-      text-align: center;
-      margin: 20px 0;
-    }
-    .quotes, .benefits, .advice, .effects {
-      background: white;
-      margin: 20px 0;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    ul { line-height: 1.6; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lockedeen - Sobriety Support</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:white;
+    transition:0.5s;
+}
+
+body.light-mode{
+    color:#222;
+}
+
+.overlay{
+    background:rgba(0,0,0,0.65);
+    min-height:100vh;
+    transition:0.5s;
+}
+
+body.light-mode .overlay{
+    background:rgba(255,255,255,0.75);
+}
+
+header{
+    background:rgba(0,0,0,0.3);
+    padding:25px;
+    text-align:center;
+    position:relative;
+}
+
+body.light-mode header{
+    background:rgba(255,255,255,0.4);
+}
+
+header h1{
+    font-size:3rem;
+}
+
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h2{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:1.2rem;
+    max-width:700px;
+    margin:auto;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.95);
+    color:#333;
+    border-radius:15px;
+    padding:20px;
+    margin:25px 0;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+body.light-mode .card{
+    background:rgba(255,255,255,0.95);
+}
+
+.section-image{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.counter{
+    font-size:2.5rem;
+    color:#27ae60;
+    font-weight:bold;
+    text-align:center;
+    margin:20px 0;
+}
+
+input[type="date"]{
+    padding:10px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.green-btn{
+    background:#27ae60;
+    color:white;
+}
+
+.green-btn:hover{
+    background:#219150;
+}
+
+.mode-btn{
+    position:absolute;
+    right:20px;
+    top:20px;
+    background:#f1c40f;
+    color:black;
+    font-weight:bold;
+}
+
+.progress-container{
+    width:100%;
+    height:25px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:#27ae60;
+    transition:1s;
+}
+
+ul{
+    padding-left:20px;
+    line-height:1.8;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+}
+
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>Lockedeen.com</h1>
-    <p>Your journey to freedom from drugs</p>
-  </header>
 
-  <section>
-    <h2>Sobriety Counter</h2>
-    <p>Days sober since your chosen date:</p>
-    <div class="counter" id="counter">0</div>
-    <input type="date" id="startDate">
-    <button onclick="updateCounter()">Set Start Date</button>
-  </section>
+<div class="overlay">
 
-  <section class="benefits">
-    <h2>Benefits of Sobriety</h2>
-    <ul>
-      <li>Improved physical health and energy</li>
-      <li>Clearer thinking and better focus</li>
-      <li>Stronger relationships</li>
-      <li>Financial stability</li>
-      <li>Greater self-confidence</li>
-    </ul>
-  </section>
+<header>
 
-  <section class="quotes">
-    <h2>Motivational Quotes</h2>
-    <p>"Recovery is not for people who need it, it's for people who want it."</p>
-    <p>"Every day sober is a victory worth celebrating."</p>
-    <p>"You are stronger than your cravings."</p>
-  </section>
+<button class="mode-btn" onclick="toggleMode()">
+🌙 Dark / ☀️ Light
+</button>
 
-  <section class="advice">
-    <h2>Advice for Staying Sober</h2>
-    <ul>
-      <li>Build healthy routines and habits</li>
-      <li>Avoid triggers and risky environments</li>
-      <li>Seek support from friends, family, or groups</li>
-      <li>Celebrate small milestones</li>
-    </ul>
-  </section>
+<h1>Lockedeen.com</h1>
+<p>Your Journey To Freedom From Drugs</p>
 
-  <section class="effects">
-    <h2>Negative Effects of Drugs</h2>
-    <ul>
-      <li>Damage to physical and mental health</li>
-      <li>Risk of addiction and dependency</li>
-      <li>Broken relationships and isolation</li>
-      <li>Financial strain and job loss</li>
-      <li>Legal problems and loss of freedom</li>
-    </ul>
-  </section>
+</header>
 
-  <script>
-    function updateCounter() {
-      const startDate = document.getElementById("startDate").value;
-      if (startDate) {
+<section class="hero">
+<h2>Every Day Clean Is A Victory</h2>
+
+<p>
+Recovery begins with a decision. Stay focused,
+stay disciplined, and keep moving forward one day at a time.
+</p>
+</section>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Sobriety Counter</h2>
+
+<p>Select the date you became sober:</p>
+
+<br>
+
+<input type="date" id="startDate">
+
+<button class="green-btn" onclick="updateCounter()">
+Start Journey
+</button>
+
+<div id="counter" class="counter">
+0 Days Sober
+</div>
+
+<div class="progress-container">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+</div>
+
+<div class="card">
+
+<img class="section-image"
+src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80">
+
+<h2>Benefits Of Sobriety</h2>
+
+<ul>
+<li>Improved physical health</li>
+<li>Higher energy levels</li>
+<li>Better focus and memory</li>
+<li>Financial stability</li>
+<li>Improved relationships</li>
+<li>Greater confidence</li>
+<li>Better sleep</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<img class="section-image"
+src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80">
+
+<h2>Motivational Quotes</h2>
+
+<p><b>"Every day sober is a victory worth celebrating."</b></p>
+<br>
+<p><b>"Recovery is possible. Freedom is possible."</b></p>
+<br>
+<p><b>"You are stronger than any craving."</b></p>
+
+</div>
+
+<div class="card">
+
+<img class="section-image"
+src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80">
+
+<h2>Advice For Staying Sober</h2>
+
+<ul>
+<li>Build healthy routines</li>
+<li>Exercise frequently</li>
+<li>Avoid triggers</li>
+<li>Talk to supportive people</li>
+<li>Celebrate milestones</li>
+<li>Stay focused on your goals</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<img class="section-image"
+src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1200&q=80">
+
+<h2>Negative Effects Of Drug Abuse</h2>
+
+<ul>
+<li>Addiction and dependency</li>
+<li>Financial problems</li>
+<li>Mental health issues</li>
+<li>Physical health damage</li>
+<li>Isolation from loved ones</li>
+<li>Loss of opportunities</li>
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+<h3>💚 One Day At A Time 💚</h3>
+<p>© 2026 Lockedeen.com</p>
+</footer>
+
+</div>
+
+<script>
+
+function updateCounter(){
+
+    const startDate =
+    document.getElementById("startDate").value;
+
+    if(startDate){
+
         const start = new Date(startDate);
         const today = new Date();
-        const diffTime = today - start;
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        document.getElementById("counter").innerText = diffDays + " days";
-      }
+
+        const diff =
+        Math.floor(
+        (today - start) /
+        (1000*60*60*24)
+        );
+
+        document.getElementById("counter")
+        .innerText = diff + " Days Sober";
+
+        let progress = Math.min(diff,100);
+
+        document.getElementById("progressBar")
+        .style.width = progress + "%";
     }
-  </script>
+}
+
+function toggleMode(){
+    document.body.classList.toggle("light-mode");
+}
+
+</script>
+
 </body>
 </html>
