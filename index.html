@@ -19,37 +19,79 @@ body{
     background-size:cover;
     background-position:center;
     background-attachment:fixed;
-    color:white;
-    transition:0.5s;
+    transition:0.4s;
 }
 
-body.light-mode{
+/* DARK MODE DEFAULT */
+
+body.dark-mode{
+    color:white;
+}
+
+body.dark-mode .overlay{
+    background:rgba(0,0,0,0.82);
+}
+
+body.dark-mode .card{
+    background:#1c1c1c;
+    color:white;
+    border:1px solid #333;
+}
+
+body.dark-mode .card h2{
+    color:#2ecc71;
+}
+
+body.dark-mode input{
+    background:#2a2a2a;
+    color:white;
+    border:1px solid #555;
+}
+
+body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:invert(1);
+}
+
+body.dark-mode .progress-container{
+    background:#444;
+}
+
+/* LIGHT MODE */
+
+body:not(.dark-mode){
+    color:white;
+}
+
+body:not(.dark-mode) .overlay{
+    background:rgba(0,0,0,0.55);
+}
+
+body:not(.dark-mode) .card{
+    background:rgba(255,255,255,0.95);
     color:#222;
 }
 
-.overlay{
-    background:rgba(0,0,0,0.65);
-    min-height:100vh;
-    transition:0.5s;
-}
+/* GENERAL */
 
-body.light-mode .overlay{
-    background:rgba(255,255,255,0.75);
+.overlay{
+    min-height:100vh;
+    transition:0.4s;
 }
 
 header{
-    background:rgba(0,0,0,0.3);
-    padding:25px;
     text-align:center;
+    padding:25px;
+    background:rgba(0,0,0,0.3);
     position:relative;
 }
 
-body.light-mode header{
-    background:rgba(255,255,255,0.4);
+h1{
+    font-size:3rem;
 }
 
-header h1{
-    font-size:3rem;
+header p{
+    margin-top:10px;
+    font-size:1.2rem;
 }
 
 .hero{
@@ -58,13 +100,13 @@ header h1{
 }
 
 .hero h2{
-    font-size:3rem;
+    font-size:3.5rem;
     margin-bottom:15px;
 }
 
 .hero p{
-    font-size:1.2rem;
-    max-width:700px;
+    font-size:1.3rem;
+    max-width:800px;
     margin:auto;
 }
 
@@ -75,16 +117,11 @@ header h1{
 }
 
 .card{
-    background:rgba(255,255,255,0.95);
-    color:#333;
     border-radius:15px;
     padding:20px;
     margin:25px 0;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
-}
-
-body.light-mode .card{
-    background:rgba(255,255,255,0.95);
+    box-shadow:0 5px 15px rgba(0,0,0,0.35);
+    transition:0.4s;
 }
 
 .section-image{
@@ -96,21 +133,15 @@ body.light-mode .card{
 }
 
 .counter{
-    font-size:2.5rem;
+    text-align:center;
+    font-size:3rem;
     color:#27ae60;
     font-weight:bold;
-    text-align:center;
-    margin:20px 0;
+    margin:30px 0;
 }
 
-input[type="date"]{
+input[type=date]{
     padding:10px;
-}
-
-button{
-    padding:10px 20px;
-    border:none;
-    cursor:pointer;
     border-radius:5px;
 }
 
@@ -121,6 +152,13 @@ button{
 
 .green-btn:hover{
     background:#219150;
+}
+
+button{
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 .mode-btn{
@@ -135,10 +173,8 @@ button{
 .progress-container{
     width:100%;
     height:25px;
-    background:#ddd;
     border-radius:20px;
     overflow:hidden;
-    margin-top:15px;
 }
 
 .progress-bar{
@@ -161,14 +197,14 @@ footer{
 </style>
 </head>
 
-<body>
+<body class="dark-mode">
 
 <div class="overlay">
 
 <header>
 
 <button class="mode-btn" onclick="toggleMode()">
-🌙 Dark / ☀️ Light
+🌙 / ☀️
 </button>
 
 <h1>Lockedeen.com</h1>
@@ -177,12 +213,15 @@ footer{
 </header>
 
 <section class="hero">
+
 <h2>Every Day Clean Is A Victory</h2>
 
 <p>
-Recovery begins with a decision. Stay focused,
-stay disciplined, and keep moving forward one day at a time.
+Recovery begins with a decision.
+Stay focused, stay disciplined,
+and keep moving forward one day at a time.
 </p>
+
 </section>
 
 <div class="container">
@@ -201,12 +240,12 @@ stay disciplined, and keep moving forward one day at a time.
 Start Journey
 </button>
 
-<div id="counter" class="counter">
+<div class="counter" id="counter">
 0 Days Sober
 </div>
 
 <div class="progress-container">
-<div id="progressBar" class="progress-bar"></div>
+<div class="progress-bar" id="progressBar"></div>
 </div>
 
 </div>
@@ -219,13 +258,13 @@ src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fi
 <h2>Benefits Of Sobriety</h2>
 
 <ul>
-<li>Improved physical health</li>
-<li>Higher energy levels</li>
-<li>Better focus and memory</li>
+<li>Improved physical health and energy</li>
+<li>Clearer thinking and better focus</li>
+<li>Stronger relationships</li>
 <li>Financial stability</li>
-<li>Improved relationships</li>
-<li>Greater confidence</li>
-<li>Better sleep</li>
+<li>Greater self-confidence</li>
+<li>Better sleep quality</li>
+<li>Improved mental health</li>
 </ul>
 
 </div>
@@ -237,11 +276,15 @@ src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fi
 
 <h2>Motivational Quotes</h2>
 
-<p><b>"Every day sober is a victory worth celebrating."</b></p>
+<p><strong>"Recovery is not for people who need it, it's for people who want it."</strong></p>
+
 <br>
-<p><b>"Recovery is possible. Freedom is possible."</b></p>
+
+<p><strong>"Every day sober is a victory worth celebrating."</strong></p>
+
 <br>
-<p><b>"You are stronger than any craving."</b></p>
+
+<p><strong>"You are stronger than your cravings."</strong></p>
 
 </div>
 
@@ -254,11 +297,11 @@ src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fi
 
 <ul>
 <li>Build healthy routines</li>
-<li>Exercise frequently</li>
-<li>Avoid triggers</li>
-<li>Talk to supportive people</li>
+<li>Exercise regularly</li>
+<li>Avoid triggers and risky environments</li>
+<li>Seek support from family and friends</li>
+<li>Join support groups</li>
 <li>Celebrate milestones</li>
-<li>Stay focused on your goals</li>
 </ul>
 
 </div>
@@ -272,10 +315,10 @@ src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fi
 
 <ul>
 <li>Addiction and dependency</li>
-<li>Financial problems</li>
-<li>Mental health issues</li>
+<li>Mental health problems</li>
 <li>Physical health damage</li>
-<li>Isolation from loved ones</li>
+<li>Broken relationships</li>
+<li>Financial difficulties</li>
 <li>Loss of opportunities</li>
 </ul>
 
@@ -284,8 +327,11 @@ src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fi
 </div>
 
 <footer>
-<h3>💚 One Day At A Time 💚</h3>
+
+<h2>💚 One Day At A Time 💚</h2>
+
 <p>© 2026 Lockedeen.com</p>
+
 </footer>
 
 </div>
@@ -299,27 +345,29 @@ function updateCounter(){
 
     if(startDate){
 
-        const start = new Date(startDate);
-        const today = new Date();
+        const start =
+        new Date(startDate);
 
-        const diff =
+        const today =
+        new Date();
+
+        const days =
         Math.floor(
         (today - start) /
-        (1000*60*60*24)
-        );
+        (1000*60*60*24));
 
         document.getElementById("counter")
-        .innerText = diff + " Days Sober";
-
-        let progress = Math.min(diff,100);
+        .innerText =
+        days + " Days Sober";
 
         document.getElementById("progressBar")
-        .style.width = progress + "%";
+        .style.width =
+        Math.min(days,100) + "%";
     }
 }
 
 function toggleMode(){
-    document.body.classList.toggle("light-mode");
+    document.body.classList.toggle("dark-mode");
 }
 
 </script>
